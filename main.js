@@ -6,9 +6,9 @@ const canvas = document.getElementById("visualizationCanvas");
 const ctx = canvas.getContext("2d");
 
 function resizeCanvas() {
-    const parentElement = canvas.parentElement;
+    const parentElement = canvas;
     canvas.width = parentElement.clientWidth * 0.9;
-    canvas.height = window.innerHeight * 0.6; // Ajuste a altura aqui conforme necessário
+    canvas.height = canvas.width; // Ajuste a altura aqui conforme necessário
     drawEmptyGrid(ctx);
 }
 
@@ -45,7 +45,6 @@ function createGrid(rows, cols) {
 }
 
 function drawGrid(ctx, grid, start, goal) {
-    const cellSize = 60;
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
     for (let row = 0; row < grid.length; row++) {
@@ -62,5 +61,5 @@ function drawCell(ctx, row, col, color) {
     const cellSize = 60;
     ctx.fillStyle = color;
     ctx.fillRect(col * cellSize, row * cellSize, cellSize, cellSize);
-    ctx.strokeRect(col * cellSize, row * col * cellSize, cellSize, cellSize);
+    ctx.strokeRect(col * cellSize, row * cellSize, cellSize, cellSize);
 }
