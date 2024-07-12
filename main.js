@@ -1,10 +1,8 @@
-import { runBFS } from './algorithms/bfs.js';
-//import { runDFS } from './algorithms/dfs.js';
-//import { runAStar } from './algorithms/a_star.js';
+import { visualizeBFS } from './modules/bfs.js';
 
-// Exemplo de inicialização com BFS
-runBFS('#visualization');
+document.addEventListener('DOMContentLoaded', () => {
+    const canvas = document.getElementById('visualizationCanvas');
+    const ctx = canvas.getContext('2d');
 
-// Você pode trocar por outros algoritmos para testar
-// runDFS('#visualization');
-// runAStar('#visualization');
+    visualizeBFS(ctx);
+});
