@@ -6,8 +6,9 @@ const canvas = document.getElementById("visualizationCanvas");
 const ctx = canvas.getContext("2d");
 
 function resizeCanvas() {
-    canvas.width = canvas.clientWidth;
-    canvas.height = canvas.clientHeight;
+    const parentElement = canvas.parentElement;
+    canvas.width = parentElement.clientWidth * 0.9;
+    canvas.height = window.innerHeight * 0.6; // Ajuste a altura aqui conforme necessário
     drawEmptyGrid(ctx);
 }
 
@@ -61,5 +62,5 @@ function drawCell(ctx, row, col, color) {
     const cellSize = 60;
     ctx.fillStyle = color;
     ctx.fillRect(col * cellSize, row * cellSize, cellSize, cellSize);
-    ctx.strokeRect(col * cellSize, row * cellSize, cellSize, cellSize);
+    ctx.strokeRect(col * cellSize, row * col * cellSize, cellSize, cellSize);
 }
