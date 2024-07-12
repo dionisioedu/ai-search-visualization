@@ -7,7 +7,7 @@ const ctx = canvas.getContext("2d");
 
 function resizeCanvas() {
     const parentElement = canvas;
-    canvas.width = parentElement.clientWidth * 0.9;
+    canvas.width = parentElement.clientWidth * 1.0;
     canvas.height = canvas.width; // Ajuste a altura aqui conforme necessário
     drawEmptyGrid(ctx);
 }
