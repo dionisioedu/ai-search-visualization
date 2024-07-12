@@ -1,8 +1,18 @@
-import { visualizeBFS } from './modules/bfs.js';
+import { visualizeBFS } from "./modules/bfs.js";
+import { visualizeDFS } from "./modules/dfs.js";
+import { visualizeAStar } from "./modules/a_star.js";
 
-document.addEventListener('DOMContentLoaded', () => {
-    const canvas = document.getElementById('visualizationCanvas');
-    const ctx = canvas.getContext('2d');
+const canvas = document.getElementById("visualizationCanvas");
+const ctx = canvas.getContext("2d");
 
-    visualizeBFS(ctx);
+document.getElementById("startBFS").addEventListener("click", () => {
+  visualizeBFS(ctx);
+});
+
+document.getElementById("startDFS").addEventListener("click", () => {
+  visualizeDFS(ctx);
+});
+
+document.getElementById("startAStar").addEventListener("click", () => {
+  visualizeAStar(ctx);
 });
