@@ -18,6 +18,7 @@ export function visualizeBFS(ctx) {
 
     function bfs() {
         if (queue.length === 0) {
+            drawEmptyGrid(ctx);
             return;
         }
 
@@ -81,4 +82,13 @@ function drawCell(ctx, row, col, color) {
     ctx.fillStyle = color;
     ctx.fillRect(col * cellSize, row * cellSize, cellSize, cellSize);
     ctx.strokeRect(col * cellSize, row * cellSize, cellSize, cellSize);
+}
+
+function drawEmptyGrid(ctx) {
+    const rows = 10;
+    const cols = 10;
+    const grid = createGrid(rows, cols);
+    const start = [0, 0];
+    const goal = [9, 9];
+    drawGrid(ctx, grid, start, goal);
 }
