@@ -4,10 +4,11 @@ import { visualizeAStar } from "./modules/astar.js";
 
 const canvas = document.getElementById("visualizationCanvas");
 const ctx = canvas.getContext("2d");
+const cellSize = canvas.clientWidth / 10;
 
 function resizeCanvas() {
     const parentElement = canvas;
-    canvas.width = parentElement.clientWidth * 1.0;
+    canvas.width = parentElement.clientWidth;
     canvas.height = canvas.width; // Ajuste a altura aqui conforme necessário
     drawEmptyGrid(ctx);
 }
@@ -25,15 +26,15 @@ window.addEventListener("resize", resizeCanvas);
 resizeCanvas();
 
 document.getElementById("startBFS").addEventListener("click", () => {
-  visualizeBFS(ctx);
+  visualizeBFS(ctx, cellSize);
 });
 
 document.getElementById("startDFS").addEventListener("click", () => {
-  visualizeDFS(ctx);
+  visualizeDFS(ctx, cellSize);
 });
 
 document.getElementById("startAStar").addEventListener("click", () => {
-  visualizeAStar(ctx);
+  visualizeAStar(ctx, cellSize);
 });
 
 document.getElementById("clearGrid").addEventListener("click", () => {
@@ -58,7 +59,6 @@ function drawGrid(ctx, grid, start, goal) {
 }
 
 function drawCell(ctx, row, col, color) {
-    const cellSize = 60;
     ctx.fillStyle = color;
     ctx.fillRect(col * cellSize, row * cellSize, cellSize, cellSize);
     ctx.strokeRect(col * cellSize, row * cellSize, cellSize, cellSize);

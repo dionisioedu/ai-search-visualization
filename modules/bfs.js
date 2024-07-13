@@ -1,4 +1,4 @@
-export function visualizeBFS(ctx) {
+export function visualizeBFS(ctx, cellSize) {
     // Exemplo de grid simples para visualização do BFS
     const rows = 10;
     const cols = 10;
@@ -9,7 +9,7 @@ export function visualizeBFS(ctx) {
     const goal = [9, 9];
 
     // Desenhar grid inicial
-    drawGrid(ctx, grid, start, goal);
+    drawGrid(ctx, cellSize, grid, start, goal);
 
     // Implementação do BFS
     const queue = [start];
@@ -18,7 +18,7 @@ export function visualizeBFS(ctx) {
 
     function bfs() {
         if (queue.length === 0) {
-            drawEmptyGrid(ctx);
+            drawEmptyGrid(ctx, cellSize);
             return;
         }
 
@@ -38,7 +38,7 @@ export function visualizeBFS(ctx) {
                 visited.add(neighborKey);
 
                 // Desenhar a visita no grid
-                drawCell(ctx, nRow, nCol, 'blue');
+                drawCell(ctx, cellSize, nRow, nCol, 'blue');
             }
         }
 
@@ -63,32 +63,30 @@ function getNeighbors(row, col, rows, cols) {
     return neighbors;
 }
 
-function drawGrid(ctx, grid, start, goal) {
-    const cellSize = 60;
+function drawGrid(ctx, cellSize, grid, start, goal) {
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
     for (let row = 0; row < grid.length; row++) {
         for (let col = 0; col < grid[row].length; col++) {
-            drawCell(ctx, row, col, 'white');
+            drawCell(ctx, cellSize, row, col, 'white');
         }
     }
 
-    drawCell(ctx, start[0], start[1], 'green');
-    drawCell(ctx, goal[0], goal[1], 'red');
+    drawCell(ctx, cellSize, start[0], start[1], 'green');
+    drawCell(ctx, cellSize, goal[0], goal[1], 'red');
 }
 
-function drawCell(ctx, row, col, color) {
-    const cellSize = 60;
+function drawCell(ctx, cellSize, row, col, color) {
     ctx.fillStyle = color;
     ctx.fillRect(col * cellSize, row * cellSize, cellSize, cellSize);
     ctx.strokeRect(col * cellSize, row * cellSize, cellSize, cellSize);
 }
 
-function drawEmptyGrid(ctx) {
+function drawEmptyGrid(ctx, cellSize) {
     const rows = 10;
     const cols = 10;
     const grid = createGrid(rows, cols);
     const start = [0, 0];
     const goal = [9, 9];
-    drawGrid(ctx, grid, start, goal);
+    drawGrid(ctx, cellSize, grid, start, goal);
 }
