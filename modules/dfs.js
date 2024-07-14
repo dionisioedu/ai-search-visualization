@@ -13,7 +13,7 @@ export function visualizeDFS(ctx, cellSize) {
     const visited = new Set();
     visited.add(start.toString());
 
-    function dfs() {
+    async function dfs() {
         if (stack.length === 0) {
             drawEmptyGrid(ctx, cellSize);
             return;
@@ -34,6 +34,8 @@ export function visualizeDFS(ctx, cellSize) {
                 stack.push([nRow, nCol]);
                 visited.add(neighborKey);
                 drawCell(ctx, cellSize, nRow, nCol, 'blue');
+
+                await new Promise(resolve => setTimeout(resolve, 100));
             }
         }
 

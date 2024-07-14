@@ -16,7 +16,7 @@ export function visualizeBFS(ctx, cellSize) {
     const visited = new Set();
     visited.add(start.toString());
 
-    function bfs() {
+    async function bfs() {
         if (queue.length === 0) {
             drawEmptyGrid(ctx, cellSize);
             return;
@@ -39,6 +39,8 @@ export function visualizeBFS(ctx, cellSize) {
 
                 // Desenhar a visita no grid
                 drawCell(ctx, cellSize, nRow, nCol, 'blue');
+
+                await new Promise(resolve => setTimeout(resolve, 100));
             }
         }
 

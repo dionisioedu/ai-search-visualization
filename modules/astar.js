@@ -16,7 +16,7 @@ export function visualizeAStar(ctx, cellSize) {
     gScore.set(start.toString(), 0);
     fScore.set(start.toString(), heuristic(start, goal));
 
-    function aStar() {
+    async function aStar() {
         if (openSet.size === 0) {
             drawEmptyGrid(ctx, cellSize);
             return;
@@ -47,6 +47,8 @@ export function visualizeAStar(ctx, cellSize) {
                 if (!openSet.has(neighborKey)) {
                     openSet.add(neighborKey);
                     drawCell(ctx, cellSize, nRow, nCol, 'blue');
+
+                    await new Promise(resolve => setTimeout(resolve, 100));
                 }
             }
         }
