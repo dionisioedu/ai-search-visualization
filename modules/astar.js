@@ -1,10 +1,17 @@
-export function visualizeAStar(ctx, cellSize) {
+export function visualizeAStar(ctx, walls, cellSize) {
     const rows = 10;
     const cols = 10;
     const grid = createGrid(rows, cols);
 
     const start = [0, 0];
     const goal = [9, 9];
+
+    for (let row = 0; row < rows; row++) {
+        for (let col = 0; col < cols; col++) {
+            if (walls[row][col] === 1)
+                grid[row][col] = 1;
+        }
+    }
 
     drawGrid(ctx, cellSize, grid, start, goal);
 
@@ -44,7 +51,7 @@ export function visualizeAStar(ctx, cellSize) {
                 cameFrom.set(neighborKey, current);
                 gScore.set(neighborKey, tentativeGScore);
                 fScore.set(neighborKey, tentativeGScore + heuristic([nRow, nCol], goal));
-                if (!openSet.has(neighborKey)) {
+                if (!openSet.has(neighborKey) && grid[nRow][nCol] === 0) {
                     openSet.add(neighborKey);
                     drawCell(ctx, cellSize, nRow, nCol, 'blue');
 
@@ -80,7 +87,8 @@ function drawGrid(ctx, cellSize, grid, start, goal) {
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     for (let row = 0; row < grid.length; row++) {
         for (let col = 0; col < grid[row].length; col++) {
-            drawCell(ctx, cellSize, row, col, 'white');
+            const color = grid[row][col] === 1 ? 'black' : 'white';
+            drawCell(ctx, cellSize, row, col, color);
         }
     }
     drawCell(ctx, cellSize, start[0], start[1], 'green');

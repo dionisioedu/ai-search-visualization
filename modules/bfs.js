@@ -1,8 +1,15 @@
-export function visualizeBFS(ctx, cellSize) {
+export function visualizeBFS(ctx, walls, cellSize) {
     // Exemplo de grid simples para visualização do BFS
     const rows = 10;
     const cols = 10;
     const grid = createGrid(rows, cols);
+
+    for (let row = 0; row < rows; row++) {
+        for (let col = 0; col < cols; col++) {
+            if (walls[row][col] === 1)
+                grid[row][col] = 1;
+        }
+    }
 
     // Posição inicial e final
     const start = [0, 0];
@@ -33,7 +40,7 @@ export function visualizeBFS(ctx, cellSize) {
         for (const [nRow, nCol] of neighbors) {
             const neighborKey = [nRow, nCol].toString();
 
-            if (!visited.has(neighborKey)) {
+            if (!visited.has(neighborKey) && grid[nRow][nCol] === 0) {
                 queue.push([nRow, nCol]);
                 visited.add(neighborKey);
 
@@ -70,7 +77,8 @@ function drawGrid(ctx, cellSize, grid, start, goal) {
 
     for (let row = 0; row < grid.length; row++) {
         for (let col = 0; col < grid[row].length; col++) {
-            drawCell(ctx, cellSize, row, col, 'white');
+            const color = grid[row][col] === 1 ? 'black' : 'white';
+            drawCell(ctx, cellSize, row, col, color);
         }
     }
 
